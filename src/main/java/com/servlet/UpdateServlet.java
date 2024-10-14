@@ -14,32 +14,35 @@ import com.dao.StudentDAO;
 import com.entity.Student;
 
 @WebServlet("/update")
-public class UpdateServlet extends HttpServlet
-{
+public class UpdateServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String name=req.getParameter("name");
-		String dob=req.getParameter("dob");
-		String address=req.getParameter("address");
-		String qualification=req.getParameter("abc");
-		String email=req.getParameter("email");
-	    int id=Integer.parseInt(req.getParameter("id"));
 
-	    Student student=new Student( id,name,dob,address,qualification,email);
-		
-	StudentDAO dao=new StudentDAO(DBConnect.getConn());
-	HttpSession session=req.getSession();
-	
-	   boolean f=dao.updateStudent(student);
-	   
-	   if(f) {
-		   session.setAttribute("succMsg", "Student Details Update Sucessfully...");
-		   resp.sendRedirect("index.jsp");
-	   }
-	   else {
-		   session.setAttribute("errorMsg", "Something Wrong Server ");
-		   resp.sendRedirect("index.jsp");
-	   }
+		String name = req.getParameter("name");
+		String dob = req.getParameter("dob");
+		String address = req.getParameter("address");
+		String qualification = req.getParameter("abc");
+		String email = req.getParameter("email");
+		int id = Integer.parseInt(req.getParameter("id"));
+
+		Student student = new Student(id, name, dob, address, qualification, email);
+
+		StudentDAO dao = new StudentDAO(DBConnect.getConn());
+		HttpSession session = req.getSession();
+
+		boolean f = dao.updateStudent(student);
+
+		if (f) {
+			session.setAttribute("succMsg", "Student Details Update Sucessfully...");
+			resp.sendRedirect("index.jsp");
+		} else {
+			session.setAttribute("errorMsg", "Something Wrong Server ");
+			resp.sendRedirect("index.jsp");
+		}
 	}
 }

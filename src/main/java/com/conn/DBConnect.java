@@ -9,9 +9,9 @@ public class DBConnect {
     public static Connection getConn() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentmanagement", "root", "2323");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "2323");
         } catch (Exception e) {
-            e.fillInStackTrace();
+            e.printStackTrace();
         }
         return conn;
     }
